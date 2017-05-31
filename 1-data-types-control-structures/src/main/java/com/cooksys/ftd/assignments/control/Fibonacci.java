@@ -1,5 +1,6 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.Arrays;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -24,7 +25,15 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if(i<0){
+        	throw new IllegalArgumentException();
+        }
+        if(i==0 || i==1){
+        	return 1;
+        }
+        else
+        	return atIndex(i-1) +atIndex(i-2);
+        
     }
 
     /**
@@ -38,7 +47,17 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if(end<0 || start<0 || end<start){
+        		throw new IllegalArgumentException();
+        }
+        
+        int[] fibslice=new int[end-start];
+        
+        for (int i=0;i<end-start;i++){
+        	fibslice [i]=atIndex(start+i);
+        }
+        return fibslice;
+        
     }
 
     /**
@@ -49,6 +68,19 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (count<0){
+    	throw new IllegalArgumentException();
+        }
+        int[] fib=new int[count];
+        
+        for(int i=0;i<count;i++){
+        	fib[i]=atIndex(i);
+        }
+        return fib;
+        
+    }
+    public static void main(String[] args) {
+    	System.out.println(Arrays.toString(slice(2,10)));
+    	System.out.println(Arrays.toString(fibonacci(10)));
     }
 }
