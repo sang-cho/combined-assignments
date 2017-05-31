@@ -1,5 +1,6 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.Arrays;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,16 +27,11 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-    	int x=a%b;
-    	if(x==0){
-    		return true;
-    	}
-    	else if(x!=0){
-    		return false;
-    	}
-    	else{
-        throw new IllegalArgumentException("Cannot divide by 0. ");
-    	}
+		if (b==0){
+			throw new IllegalArgumentException("Cannot divide by 0.");
+		}
+
+		return a%b==0;
     }
 
     /**
@@ -50,14 +46,14 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-    	String result = null;
-    	if(divides(n,3)&&divides(n,5)==true){
+    	String result=null;
+    	if(divides(n,3)&&divides(n,5)){
     		result=n+ ": FizzBuzz"; 
     	}
-    	else if(divides(n,3)==true){
+    	else if(divides(n,3)){
     		result=n+ ": Fizz";
     	}
-    	else if(divides(n,5)==true){
+    	else if(divides(n,5)){
     		result=n+ ": Buzz";
     	}
     	return result;
@@ -75,12 +71,32 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-    	String[] fizzbuzzmes=new String[end];
-    	for(int i=start; i<end;i++){
-    		String s=message(i);
-    		fizzbuzzmes.add(s);
-    	}
-        throw new NotImplementedException();
+		if(end<start) {
+			throw new IllegalArgumentException();
+		}
+
+		int arraysize=end-start;
+		int nullcount=0;
+
+		String[] fizzbuzzmes=new String[arraysize];
+		for (int i = 0; i < arraysize; i++) {
+			if (message(start+i)==null){
+				nullcount++;
+			}
+			fizzbuzzmes[i] = message(start + i);
+		}
+		int arraysize2=arraysize-nullcount;
+
+		String[] fizzbuzzmes2=new String[arraysize2];
+
+		int j=0;
+		for (int i=0;i<arraysize;i++){
+			if (message(start+i) != null){
+				fizzbuzzmes2[j]=message(i+start);
+				j++;
+			}
+		}
+		return fizzbuzzmes2;
     }
 
     /**
@@ -88,7 +104,20 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
-    }
+    	messages(1,116);
+    	for (int i=0;i<116;i++){
+    		if (message(i)!=null) {
+    			System.out.println(message(i));
+			}
+		}
+    	//System.out.println(message(3));
+		//System.out.println(Arrays.toString(messages(3,3)));
+		//System.out.println(Arrays.toString(messages(3,4)));
+		//System.out.println(Arrays.toString(messages(3,5)));
+		//System.out.println(Arrays.toString(messages(3,6)));
+    	//System.out.println(Arrays.toString(messages(3,7)));
+		//System.out.println(Arrays.toString(messages(12,16)));
+        //System.out.println((messages(7,3)));
 
+    }
 }
