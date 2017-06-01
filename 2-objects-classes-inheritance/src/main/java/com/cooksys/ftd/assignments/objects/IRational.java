@@ -3,7 +3,6 @@ package com.cooksys.ftd.assignments.objects;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 interface IRational {
-
     /**
      * @return the numerator of this rational number
      */
@@ -36,7 +35,10 @@ interface IRational {
      * @return the negation of this
      */
     default IRational negate() {
-        throw new NotImplementedException();
+
+      return construct( -1 * getNumerator(), getDenominator() );
+
+        //throw new NotImplementedException();
     }
 
     /**
@@ -49,7 +51,14 @@ interface IRational {
      * @throws IllegalStateException if the numerator of this rational value is 0
      */
     default IRational invert() throws IllegalStateException {
-        throw new NotImplementedException();
+
+        if( getNumerator() == 0 ){
+          throw new IllegalStateException();
+        }
+
+        return construct( getDenominator(), getNumerator() );
+
+    //    throw new NotImplementedException();
     }
 
     /**
@@ -63,7 +72,13 @@ interface IRational {
      * @throws IllegalArgumentException if that is null
      */
     default IRational add(IRational that) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if( that==null ){
+          throw new IllegalArgumentException();
+        };
+
+        return construct( ( getNumerator() * that.getDenominator() ) + ( that.getNumerator() * getDenominator() ), ( getDenominator() * that.getDenominator() ) );
+
+  //      throw new NotImplementedException();
     }
 
     /**
@@ -77,7 +92,13 @@ interface IRational {
      * @throws IllegalArgumentException if that is null
      */
     default IRational sub(IRational that) throws IllegalArgumentException {
-        throw new NotImplementedException();
+
+      if( that==null){
+        throw new IllegalArgumentException();
+      };
+      return construct( ( getNumerator() * that.getDenominator() ) - ( that.getNumerator() * getDenominator() ), ( getDenominator() * that.getDenominator() ) );
+
+        //throw new NotImplementedException();
     }
 
     /**
@@ -91,7 +112,12 @@ interface IRational {
      * @throws IllegalArgumentException if that is null
      */
     default IRational mul(IRational that) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (that==null){
+            throw new IllegalArgumentException();
+        }
+
+      return construct( ( getNumerator() * that.getNumerator() ), ( getDenominator() * that.getDenominator() ) );
+
     }
 
     /**
@@ -105,6 +131,13 @@ interface IRational {
      * @throws IllegalArgumentException if that is null or if the numerator of that is 0
      */
     default IRational div(IRational that) throws IllegalArgumentException {
-        throw new NotImplementedException();
+
+      if(that==null){
+        throw new IllegalArgumentException();
+      };
+
+      return construct( ( getNumerator() * that.getDenominator() ), ( getDenominator() * that.getNumerator() ) );
+
+    //    throw new NotImplementedException();
     }
 }
