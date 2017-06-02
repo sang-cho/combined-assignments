@@ -31,9 +31,15 @@ public class Fibonacci {
         if(i==0 || i==1){
         	return 1;
         }
-        else
-        	return atIndex(i-1) +atIndex(i-2);
-        
+        int fib = 1;
+        int fiboPrev = 1;
+        for(int k = 2; k <= i; k++){
+            int temp = fib;
+            fib += fiboPrev;
+            fiboPrev = temp;
+            System.out.println(k);
+        }
+        return fib;
     }
 
     /**
@@ -80,7 +86,13 @@ public class Fibonacci {
         
     }
     public static void main(String[] args) {
+        /*System.out.println(atIndex(0));
+        System.out.println(atIndex(1));
+        System.out.println(atIndex(2));
+        System.out.println(atIndex(3));
+        System.out.println(atIndex(4));
     	System.out.println(Arrays.toString(slice(2,10)));
     	System.out.println(Arrays.toString(fibonacci(10)));
+    	*/
     }
 }
