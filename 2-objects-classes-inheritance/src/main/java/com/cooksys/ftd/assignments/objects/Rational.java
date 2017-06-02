@@ -25,7 +25,9 @@ public class Rational implements IRational {
       //  throw new NotImplementedException();
     }
 
+
     private int numerator = 0;
+
     /**
      * @return the numerator of this rational number
      */
@@ -74,8 +76,12 @@ public class Rational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        boolean tears=true;
-        return tears;
+        if(obj instanceof IRational){
+            if(getDenominator()==((IRational) obj).getDenominator() && getNumerator() ==((IRational) obj).getNumerator()){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -88,6 +94,18 @@ public class Rational implements IRational {
     @Override
     public String toString() {
         String text = "";
+        int num = Math.abs(getNumerator());
+        int dem = Math.abs(getDenominator());
+        //float test=num/dem;
+        //if( (num > 0) == ( dem > 0)){
+        //
+        //}
+        if ( (getNumerator() < 0) != ( getDenominator() < 0) ) {
+            text+="-";
+        }
+
+        text += num + "/" + dem;
+
         return text;
     }
 }
