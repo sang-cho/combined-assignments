@@ -13,4 +13,7 @@ public interface Capitalist extends Hierarchical<Capitalist, FatCat> {
      * @return the salary of the capitalist, in dollars
      */
     int getSalary();
+
+
+
 }

@@ -3,13 +3,23 @@ package com.cooksys.ftd.assignments.collections.model;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class FatCat implements Capitalist {
+    String catName="";
+    int catSalary=0;
+    FatCat catOwner=null;
+
 
     public FatCat(String name, int salary) {
-        throw new NotImplementedException();
+        //this(name,salary,null);
+        this.catName=name;
+        this.catSalary=salary;
+        //throw new NotImplementedException();
     }
 
     public FatCat(String name, int salary, FatCat owner) {
-        throw new NotImplementedException();
+        this.catName=name;
+        this.catSalary=salary;
+        this.catOwner=owner;
+        //throw new NotImplementedException();
     }
 
     /**
@@ -17,7 +27,8 @@ public class FatCat implements Capitalist {
      */
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        return this.catName;
+        //throw new NotImplementedException();
     }
 
     /**
@@ -25,7 +36,8 @@ public class FatCat implements Capitalist {
      */
     @Override
     public int getSalary() {
-        throw new NotImplementedException();
+        return this.catSalary;
+        //throw new NotImplementedException();
     }
 
     /**
@@ -33,7 +45,11 @@ public class FatCat implements Capitalist {
      */
     @Override
     public boolean hasParent() {
-        throw new NotImplementedException();
+        if(catOwner!=null){
+            return true;
+        }
+        return false;
+        //throw new NotImplementedException();
     }
 
     /**
@@ -41,6 +57,31 @@ public class FatCat implements Capitalist {
      */
     @Override
     public FatCat getParent() {
-        throw new NotImplementedException();
+        if (!hasParent()){
+            return null;
+        }
+        return catOwner;
+        //throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FatCat fatCat = (FatCat) o;
+
+        if (catSalary != fatCat.catSalary) return false;
+        if (catName != null ? !catName.equals(fatCat.catName) : fatCat.catName != null) return false;
+        return catOwner != null ? catOwner.equals(fatCat.catOwner) : fatCat.catOwner == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = catName != null ? catName.hashCode() : 0;
+        result = 31 * result + catSalary;
+        result = 31 * result + (catOwner != null ? catOwner.hashCode() : 0);
+        return result;
     }
 }
