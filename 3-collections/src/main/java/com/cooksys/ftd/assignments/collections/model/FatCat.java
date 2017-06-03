@@ -58,7 +58,7 @@ public class FatCat implements Capitalist {
     @Override
     public FatCat getParent() {
         if (!hasParent()){
-            return null;
+              return null;
         }
         return catOwner;
         //throw new NotImplementedException();
