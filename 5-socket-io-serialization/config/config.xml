@@ -1,1 +1,5 @@
-<config/>
+<config>
+    <local port="1234"/>
+    <remote host="127.0.0.1" port="1234"/>
+    <student-file-path>C:/Users/sangc/code/combined-assignments/5-socket-io-serialization/config/student.xml</student-file-path>
+</config>

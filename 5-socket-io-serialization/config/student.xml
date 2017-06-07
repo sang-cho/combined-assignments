@@ -1,1 +1,5 @@
-<student/>
+<student firstName="Sang" lastName="Cho">
+    <favorite-ide>intellij</favorite-ide>
+    <favorite-language>java</favorite-language>
+    <favorite-paradigm>swag</favorite-paradigm>
+</student>

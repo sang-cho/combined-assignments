@@ -1,5 +1,15 @@
 package com.cooksys.ftd.assignments.socket;
 
+import com.cooksys.ftd.assignments.socket.model.Config;
+import com.cooksys.ftd.assignments.socket.model.Student;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.DataInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.Socket;
+
 public class Client {
 
     /**
@@ -12,6 +22,28 @@ public class Client {
      * over the socket as xml, and should unmarshal that object before printing its details to the console.
      */
     public static void main(String[] args) {
+        Config leconfig= null;
+        try {
+            leconfig = Utils.loadConfig("C:/Users/sangc/code/combined-assignments/5-socket-io-serialization/config/config.xml",Utils.createJAXBContext());
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try(Socket socket=new Socket(leconfig.getRemote().getHost(), leconfig.getRemote().getPort());
+        DataInputStream input=new DataInputStream(socket.getInputStream());) {
+            Unmarshaller unmarshaller = Utils.createJAXBContext().createUnmarshaller();
+
+            Student sadstudent = (Student) unmarshaller.unmarshal(input);
+            System.out.println(sadstudent);
+
+
+        }catch(IOException|JAXBException e){
+            System.err.println("Nu uh uh...whats the magic word....");
+
+        }
+
         // TODO
     }
 }
